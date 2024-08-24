@@ -1,0 +1,26 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-o",
+      "bin/teste",
+      "src/test_blas.cpp"
+    ],
+    "directory": "/home/kamenev/periodo/ComputationalLinearAlgebra/trabalho-final",
+    "file": "/home/kamenev/periodo/ComputationalLinearAlgebra/trabalho-final/src/test_blas.cpp",
+    "output": "/home/kamenev/periodo/ComputationalLinearAlgebra/trabalho-final/bin/teste"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-o",
+      "bin/teste",
+      "src/timer.cpp"
+    ],
+    "directory": "/home/kamenev/periodo/ComputationalLinearAlgebra/trabalho-final",
+    "file": "/home/kamenev/periodo/ComputationalLinearAlgebra/trabalho-final/src/timer.cpp",
+    "output": "/home/kamenev/periodo/ComputationalLinearAlgebra/trabalho-final/bin/teste"
+  }
+]
