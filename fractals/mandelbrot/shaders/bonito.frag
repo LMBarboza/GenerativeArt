@@ -4,6 +4,7 @@ layout(location = 1) uniform float rect_height;
 layout(location = 2) uniform vec2 area_w;
 layout(location = 3) uniform vec2 area_h;
 layout(location = 4) uniform uint max_iterations;
+layout(location = 5) uniform vec2 inC;
 
 out vec4 outColor;
 
@@ -21,7 +22,7 @@ vec3 getColor(float t) {
 
 void main() {
 
-    const vec2 C = vec2(-0.4, 0.59);
+    const vec2 C = inC;
     vec2 Z = vec2(gl_FragCoord.x * (area_w.y - area_w.x) / rect_width  + area_w.x,
                         gl_FragCoord.y * (area_h.y - area_h.x) / rect_height + area_h.x);
     uint iteration = 0;
