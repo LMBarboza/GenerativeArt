@@ -7,7 +7,23 @@ layout(location = 4) uniform uint max_iterations;
 layout(location = 5) uniform vec2 inC;
 
 out vec4 outColor;
+vec3 getColor_new(float t) {
+    vec3 lightBlue = vec3(0.6, 0.8, 1.0);  // Light Blue
+    vec3 darkBlue = vec3(0.0, 0.0, 0.5);   // Dark Blue
+    vec3 orange = vec3(1.0, 0.5, 0.0);     // Orange
+    vec3 yellow = vec3(1.0, 1.0, 0.0);     // Yellow
+    vec3 black = vec3(0.0, 0.0, 0.0);      // Black
 
+    if (t < 0.25) {
+        return mix(lightBlue, darkBlue, t * 4.0); // Light Blue to Dark Blue
+    } else if (t < 0.5) {
+        return mix(darkBlue, orange, (t - 0.25) * 4.0); // Dark Blue to Orange
+    } else if (t < 0.75) {
+        return mix(orange, yellow, (t - 0.5) * 4.0); // Orange to Yellow
+    } else {
+        return mix(yellow, black, (t - 0.75) * 4.0); // Yellow to Black
+    }
+}
 vec3 getColor(float t) {
     vec3 darkPurple = vec3(0.1, 0.0, 0.2);  // Dark Purple
     vec3 pink = vec3(1.0, 0.2, 0.6);        // Pink
