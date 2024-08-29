@@ -9,6 +9,9 @@
 #include <glad/glad.h>
 #include <iostream>
 
+constexpr int WINDOW_WIDTH = 800;
+constexpr int WINDOW_HEIGHT = 800;
+
 GLfloat rectangle_data[]{-1.0F, -1.0F, 0.0F, 1.0F,  -1.0F, 0.0F,
                          1.0F,  1.0F,  0.0F, 1.0F,  1.0F,  0.0F,
                          -1.0F, 1.0F,  0.0F, -1.0F, -1.0F, 0.0F};
@@ -20,7 +23,8 @@ int main() {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-  GLFWwindow *window = glfwCreateWindow(800, 800, "Mandelbrot Set", NULL, NULL);
+  GLFWwindow *window =
+      glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Julia Set", NULL, NULL);
   if (window == NULL) {
     std::cout << "Failed to create GLFW window" << std::endl;
     glfwTerminate();
@@ -34,7 +38,7 @@ int main() {
   }
 
   glViewport(0, 0, 800, 800);
-  Shader shaderProgram("shaders/shader.vert", "shaders/shader.frag");
+  Shader shaderProgram("shaders/shader.vert", "shaders/bonito.frag");
   VAO VAO1;
   VAO1.Bind();
 
@@ -49,8 +53,8 @@ int main() {
     // glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     shaderProgram.Activate();
-    glUniform1f(0, 800);
-    glUniform1f(1, 800);
+    glUniform1f(0, WINDOW_WIDTH);
+    glUniform1f(1, WINDOW_HEIGHT);
     glUniform2f(2, -2.0F * julia_data.scale + julia_data.x,
                 1.0F * julia_data.scale + julia_data.x);
     glUniform2f(3, -1.0F * julia_data.scale + julia_data.y,
