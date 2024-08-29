@@ -20,7 +20,7 @@ int main() {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-  GLFWwindow *window = glfwCreateWindow(800, 800, "Julia Set", NULL, NULL);
+  GLFWwindow *window = glfwCreateWindow(800, 800, "Mandelbrot Set", NULL, NULL);
   if (window == NULL) {
     std::cout << "Failed to create GLFW window" << std::endl;
     glfwTerminate();
@@ -44,7 +44,7 @@ int main() {
   VAO1.Unbind();
   VBO1.Unbind();
 
-  JuliaData julia_data{1.0F, 0.0F, 0.0F, 30};
+  JuliaData julia_data{1.0F, 0.0F, 0.0F, 200};
   while (!glfwWindowShouldClose(window)) {
     // glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
