@@ -1,19 +1,17 @@
 #define GLFW_INCLUDE_NONE
-#include "../include/EBO.hpp"
+// #include "../include/EBO.hpp"
 #include "../include/VAO.hpp"
 #include "../include/VBO.hpp"
+#include "../include/julia.hpp"
 #include "../include/shader.hpp"
 #include <GLFW/glfw3.h>
 #include <cmath>
 #include <glad/glad.h>
 #include <iostream>
 
-GLfloat vertices[] = {0.0f,      0.5f * float(sqrt(3)) * 2 / 3, 0.0f,
-                      -0.5f / 2, 0.5f * float(sqrt(3)) / 6,     0.0f,
-                      0.5f / 2,  0.5f * float(sqrt(3)) / 6,     0.0f,
-                      0.0f,      -0.5f * float(sqrt(3)) / 3,    0.0f};
-
-GLuint indices[] = {0, 3, 5, 3, 2, 4, 5, 4, 1};
+GLfloat rectangle_data[]{-1.0F, -1.0F, 0.0F, 1.0F,  -1.0F, 0.0F,
+                         1.0F,  1.0F,  0.0F, 1.0F,  1.0F,  0.0F,
+                         -1.0F, 1.0F,  0.0F, -1.0F, -1.0F, 0.0F};
 
 int main() {
   glfwInit();
@@ -41,27 +39,32 @@ int main() {
   VAO VAO1;
   VAO1.Bind();
 
-  VBO VBO1(vertices, sizeof(vertices));
-  EBO EBO1(indices, sizeof(indices));
+  VBO VBO1(rectangle_data, sizeof(rectangle_data));
 
   VAO1.LinkVBO(VBO1, 0);
   VAO1.Unbind();
   VBO1.Unbind();
-  EBO1.Unbind();
 
+  JuliaData julia_data{1.0F, 0.0F, 0.0F, 30};
   while (!glfwWindowShouldClose(window)) {
     glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     shaderProgram.Activate();
+    glUniform1f(0, 800);
+    glUniform1f(1, 800);
+    glUniform2f(2, -2.0F * julia_data.scale + julia_data.x,
+                1.0F * julia_data.scale + julia_data.x);
+    glUniform2f(3, -1.0F * julia_data.scale + julia_data.y,
+                1.0F * julia_data.scale + julia_data.y);
+    glUniform1ui(4, julia_data.max_iter);
     VAO1.Bind();
-    glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
     glfwSwapBuffers(window);
     glfwPollEvents();
   }
 
   VAO1.Delete();
   VBO1.Delete();
-  EBO1.Delete();
   shaderProgram.Delete();
   glfwDestroyWindow(window);
   glfwTerminate();
