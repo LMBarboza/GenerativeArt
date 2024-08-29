@@ -36,8 +36,8 @@ int main() {
   }
 
   glViewport(0, 0, 800, 800);
-  //  Shader shaderProgram("../shaders/shader.vert", "../shaders/shader.frag");
-
+  Shader shaderProgram("shaders/shader.vert", "shaders/shader.frag");
+  std::cout << 1;
   VAO VAO1;
   VAO1.Bind();
 
@@ -52,7 +52,7 @@ int main() {
   while (!glfwWindowShouldClose(window)) {
     glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-    //   shaderProgram.Activate();
+    shaderProgram.Activate();
     VAO1.Bind();
     glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
     glfwSwapBuffers(window);
@@ -62,7 +62,7 @@ int main() {
   VAO1.Delete();
   VBO1.Delete();
   EBO1.Delete();
-  // shaderProgram.Delete();
+  shaderProgram.Delete();
   glfwDestroyWindow(window);
   glfwTerminate();
   return 0;
