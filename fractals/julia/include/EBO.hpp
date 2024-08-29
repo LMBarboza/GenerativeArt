@@ -3,7 +3,7 @@
 
 #include <glad/glad.h>
 
-class EBO {
+struct EBO {
   GLuint ID;
   EBO(GLuint *indices, GLsizeiptr size);
 
