@@ -10,3 +10,5 @@ Onde:
 
 Ele gera uma figura semelhante a um fractal ao ser visualizado, onde cada pixel é colorido 
 de acordo com o número de iterações necessárias para verificar a condição de convergência da sequência e posicionado conforme os valores reais e imaginários de C. 
+
+![image](image.png)
