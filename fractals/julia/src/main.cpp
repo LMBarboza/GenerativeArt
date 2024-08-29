@@ -16,6 +16,39 @@ GLfloat rectangle_data[]{-1.0F, -1.0F, 0.0F, 1.0F,  -1.0F, 0.0F,
                          1.0F,  1.0F,  0.0F, 1.0F,  1.0F,  0.0F,
                          -1.0F, 1.0F,  0.0F, -1.0F, -1.0F, 0.0F};
 
+JuliaData julia_data{1.0F, 0.0F, 0.0F, 200};
+
+void key_callback(GLFWwindow *window, int key, int scancode, int action,
+                  int mods) {
+
+  const float scaleFactor = 0.1F * julia_data.scale;
+  if (key == GLFW_KEY_K && action == GLFW_PRESS) {
+    julia_data.y += scaleFactor;
+  }
+
+  if (key == GLFW_KEY_J && action == GLFW_PRESS) {
+    julia_data.y -= scaleFactor;
+  }
+
+  if (key == GLFW_KEY_L && action == GLFW_PRESS) {
+    julia_data.x += scaleFactor;
+  }
+  if (key == GLFW_KEY_H && action == GLFW_PRESS) {
+    julia_data.x -= scaleFactor;
+  }
+
+  if (key == GLFW_KEY_Z && action == GLFW_PRESS) {
+    julia_data.scale -= scaleFactor;
+  }
+
+  if (key == GLFW_KEY_U && action == GLFW_PRESS) {
+    julia_data.scale += scaleFactor;
+  }
+
+  if (key == GLFW_KEY_I && action == GLFW_PRESS) {
+    julia_data.max_iter++;
+  }
+}
 int main() {
   glfwInit();
 
@@ -37,7 +70,7 @@ int main() {
     return -1;
   }
 
-  glViewport(0, 0, 800, 800);
+  glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
   Shader shaderProgram("shaders/shader.vert", "shaders/bonito.frag");
   VAO VAO1;
   VAO1.Bind();
@@ -48,7 +81,7 @@ int main() {
   VAO1.Unbind();
   VBO1.Unbind();
 
-  JuliaData julia_data{1.0F, 0.0F, 0.0F, 200};
+  glfwSetKeyCallback(window, key_callback);
   while (!glfwWindowShouldClose(window)) {
     // glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
