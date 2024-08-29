@@ -1,7 +1,12 @@
 CC = g++
-CCFLAGS = -Wall -Wextra -lglfw -lGLU -lGL -lm -lX11 -lpthread -ldl
+CCFLAGS = -std=c++17 -O2 -Wall -Wextra 
+CCLIBS = -lglfw -lGLU -lGL -lm -lX11 -lpthread -ldl
+P = main
 
-all:
-	$(CC) src/main.cpp src/glad.c -o bin/main.out $(CCFLAGS) 
+
+all: $(P)
+
+$(P): $(P).cpp
+	$(CC) $(CCFLAGS) src/$(P).cpp src/VAO.hpp src/VBO.hpp src/EBO.hpp src/shader.hpp src/glad.c $(CCLIBS) -o bin/$(P)
 
 	
