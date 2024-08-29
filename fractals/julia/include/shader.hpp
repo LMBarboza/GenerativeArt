@@ -8,12 +8,12 @@
 #include <sstream>
 #include <string>
 
-std::string get_file_contents(const char *filename);
+std::string parseShader(const std::string &filepath);
 
 struct Shader {
   GLuint ID;
 
-  Shader(const char *vertexFile, const char *fragmentFile);
+  Shader(const std::string &vertexFile, const std::string &fragmentFile);
 
   void Activate();
 

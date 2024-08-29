@@ -22,7 +22,7 @@ int main() {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-  GLFWwindow *window = glfwCreateWindow(800, 800, "YoutubeOpenGL", NULL, NULL);
+  GLFWwindow *window = glfwCreateWindow(800, 800, "Julia Set", NULL, NULL);
   if (window == NULL) {
     std::cout << "Failed to create GLFW window" << std::endl;
     glfwTerminate();
@@ -36,8 +36,7 @@ int main() {
   }
 
   glViewport(0, 0, 800, 800);
-
-  Shader shaderProgram("../shaders/shader.vert", "../shaders/shader.frag");
+  //  Shader shaderProgram("../shaders/shader.vert", "../shaders/shader.frag");
 
   VAO VAO1;
   VAO1.Bind();
@@ -53,7 +52,7 @@ int main() {
   while (!glfwWindowShouldClose(window)) {
     glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-    shaderProgram.Activate();
+    //   shaderProgram.Activate();
     VAO1.Bind();
     glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
     glfwSwapBuffers(window);
@@ -63,7 +62,7 @@ int main() {
   VAO1.Delete();
   VBO1.Delete();
   EBO1.Delete();
-  shaderProgram.Delete();
+  // shaderProgram.Delete();
   glfwDestroyWindow(window);
   glfwTerminate();
   return 0;
