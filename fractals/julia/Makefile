@@ -6,7 +6,7 @@ P = main
 
 all: $(P)
 
-$(P): $(P).cpp
-	$(CC) $(CCFLAGS) src/$(P).cpp src/VAO.hpp src/VBO.hpp src/EBO.hpp src/shader.hpp src/glad.c $(CCLIBS) -o bin/$(P)
+$(P): src/$(P).cpp
+	$(CC) $(CCFLAGS) src/$(P).cpp src/VAO.cpp src/VBO.cpp src/EBO.cpp src/shader.cpp src/glad.c $(CCLIBS) -o bin/$(P)
 
 	
