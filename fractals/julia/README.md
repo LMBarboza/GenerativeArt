@@ -5,7 +5,7 @@ O Conjunto de Mandelbrot é definido pelo conjunto de números complexos `c` par
 $$ z_{n+1} = z_n^2 + c $$
 
 Onde:
-- $ z_0 = 0 $
+- $z_0 = 0$
 - $c$ é um número complexo.
 
 Ele gera uma figura semelhante a um fractal ao ser visualizado, onde cada pixel é colorido 
