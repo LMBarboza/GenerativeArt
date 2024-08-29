@@ -1,5 +1,6 @@
 #include "../include/shader.hpp"
 #include <cstdio>
+#include <iostream>
 #include <sstream>
 #include <string>
 
@@ -16,7 +17,6 @@ std::string parseShader(const std::string &filepath) {
 Shader::Shader(const std::string &vertexFile, const std::string &fragmentFile) {
   std::string vertexCode = parseShader(vertexFile);
   std::string fragmentCode = parseShader(fragmentFile);
-
   const char *vertexSource = vertexCode.c_str();
   const char *fragmentSource = fragmentCode.c_str();
 

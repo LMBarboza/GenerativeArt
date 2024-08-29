@@ -1,5 +1,5 @@
 CC = g++
-CCFLAGS = -std=c++17 -O2 -Wall -Wextra 
+CCFLAGS = -std=c++17 -g -Wall -Wextra 
 CCLIBS = -lglfw -lGLU -lGL -lm -lX11 -lpthread -ldl
 P = main
 

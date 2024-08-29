@@ -16,8 +16,8 @@ GLfloat rectangle_data[]{-1.0F, -1.0F, 0.0F, 1.0F,  -1.0F, 0.0F,
 int main() {
   glfwInit();
 
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
   GLFWwindow *window = glfwCreateWindow(800, 800, "Julia Set", NULL, NULL);
@@ -35,7 +35,6 @@ int main() {
 
   glViewport(0, 0, 800, 800);
   Shader shaderProgram("shaders/shader.vert", "shaders/shader.frag");
-  std::cout << 1;
   VAO VAO1;
   VAO1.Bind();
 
@@ -47,7 +46,7 @@ int main() {
 
   JuliaData julia_data{1.0F, 0.0F, 0.0F, 30};
   while (!glfwWindowShouldClose(window)) {
-    glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
+    // glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     shaderProgram.Activate();
     glUniform1f(0, 800);
