@@ -21,6 +21,20 @@ GLfloat rectangle_data[]{-1.0F, -1.0F, 0.0F, 1.0F,  -1.0F, 0.0F,
 
 JuliaData julia_data{1.0F, 0.0F, 0.0F, 200};
 
+float cReal;
+float cImag;
+float a = 0.0;
+
+constexpr float scaleC = 0.5;
+
+// c = 0.7885(cosa + isina)
+//
+
+void euler(float a) {
+  cReal = scaleC * cos(a);
+  cImag = scaleC * sin(a);
+}
+
 auto lastActionTime = std::chrono::high_resolution_clock::now();
 const double actionInterval = 2;
 
@@ -60,6 +74,11 @@ void processKeyStates() {
     if (keyStates[GLFW_KEY_U]) {
       julia_data.scale += scaleFactor;
     }
+
+    if (keyStates[GLFW_KEY_C]) {
+      a += 0.01;
+      euler(a);
+    }
     if (keyStates[GLFW_KEY_I]) {
       julia_data.max_iter++;
     }
@@ -74,15 +93,17 @@ std::optional<float> getArg(int argc, char *argv[], int index) {
 }
 
 int main(int argc, char *argv[]) {
-  float cReal = -0.4f;
-  float cImag = 0.59f;
+  /*
+    float cReal = -0.4f;
+    float cImag = 0.59f;
 
-  if (auto arg1 = getArg(argc, argv, 1)) {
-    cReal = *arg1;
-  }
-  if (auto arg2 = getArg(argc, argv, 2)) {
-    cImag = *arg2;
-  }
+    if (auto arg1 = getArg(argc, argv, 1)) {
+      cReal = *arg1;
+    }
+    if (auto arg2 = getArg(argc, argv, 2)) {
+      cImag = *arg2;
+    }
+  */
   glfwInit();
 
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
