@@ -5,9 +5,11 @@
 #include "../include/julia.hpp"
 #include "../include/shader.hpp"
 #include <GLFW/glfw3.h>
+#include <chrono>
 #include <cmath>
 #include <glad/glad.h>
 #include <iostream>
+#include <unordered_map>
 
 constexpr int WINDOW_WIDTH = 800;
 constexpr int WINDOW_HEIGHT = 800;
@@ -15,6 +17,53 @@ constexpr int WINDOW_HEIGHT = 800;
 GLfloat rectangle_data[]{-1.0F, -1.0F, 0.0F, 1.0F,  -1.0F, 0.0F,
                          1.0F,  1.0F,  0.0F, 1.0F,  1.0F,  0.0F,
                          -1.0F, 1.0F,  0.0F, -1.0F, -1.0F, 0.0F};
+
+JuliaData julia_data{1.0F, 0.0F, 0.0F, 200};
+
+auto lastActionTime = std::chrono::high_resolution_clock::now();
+const double actionInterval = 2;
+
+std::unordered_map<int, bool> keyStates;
+
+void key_callback(GLFWwindow *window, int key, int scancode, int action,
+                  int mods) {
+
+  if (action == GLFW_PRESS) {
+    keyStates[key] = true;
+  } else if (action == GLFW_RELEASE) {
+    keyStates[key] = false;
+  }
+}
+
+void processKeyStates() {
+  const float scaleFactor = 0.1F * julia_data.scale;
+  auto currentTime = std::chrono::high_resolution_clock::now();
+  double elapsed =
+      std::chrono::duration<double>(currentTime - lastActionTime).count();
+  if (elapsed >= actionInterval) {
+    if (keyStates[GLFW_KEY_K]) {
+      julia_data.y += scaleFactor;
+    }
+    if (keyStates[GLFW_KEY_J]) {
+      julia_data.y -= scaleFactor;
+    }
+    if (keyStates[GLFW_KEY_L]) {
+      julia_data.x += scaleFactor;
+    }
+    if (keyStates[GLFW_KEY_H]) {
+      julia_data.x -= scaleFactor;
+    }
+    if (keyStates[GLFW_KEY_Z]) {
+      julia_data.scale -= scaleFactor;
+    }
+    if (keyStates[GLFW_KEY_U]) {
+      julia_data.scale += scaleFactor;
+    }
+    if (keyStates[GLFW_KEY_I]) {
+      julia_data.max_iter++;
+    }
+  }
+}
 
 int main() {
   glfwInit();
@@ -37,7 +86,7 @@ int main() {
     return -1;
   }
 
-  glViewport(0, 0, 800, 800);
+  glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
   Shader shaderProgram("shaders/shader.vert", "shaders/bonito.frag");
   VAO VAO1;
   VAO1.Bind();
@@ -48,10 +97,11 @@ int main() {
   VAO1.Unbind();
   VBO1.Unbind();
 
-  JuliaData julia_data{1.0F, 0.0F, 0.0F, 200};
+  glfwSetKeyCallback(window, key_callback);
   while (!glfwWindowShouldClose(window)) {
     // glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
+    processKeyStates();
     shaderProgram.Activate();
     glUniform1f(0, WINDOW_WIDTH);
     glUniform1f(1, WINDOW_HEIGHT);
