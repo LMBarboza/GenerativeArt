@@ -9,3 +9,5 @@ Onde:
 - $c$ é um número complexo constante, específico para cada Conjunto de Julia.
 
 Ele gera uma figura fractal ao ser visualizado, onde cada pixel é colorido de acordo com o número de iterações necessárias para verificar a condição de convergência da sequência e posicionado conforme os valores reais e imaginários de $z_n$.
+
+![image](image.png)
