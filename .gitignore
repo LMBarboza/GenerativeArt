@@ -27,7 +27,8 @@
 *.lib
 
 */bin/
-/fractals/*/bin/
+*/*/bin/
+
 # Executables
 *.exe
 *.out
