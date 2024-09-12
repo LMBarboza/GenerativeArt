@@ -4,9 +4,9 @@ layout(location = 1) uniform float rect_height;
 layout(location = 2) uniform vec2 area_w;
 layout(location = 3) uniform vec2 area_h;
 layout(location = 4) uniform uint max_iterations;
-layout(location = 5) uniform vec2 inC;
 
 out vec4 outColor;
+
 vec3 getColor_new(float t) {
     vec3 lightBlue = vec3(0.6, 0.8, 1.0);  // Light Blue
     vec3 darkBlue = vec3(0.0, 0.0, 0.5);   // Dark Blue
@@ -38,9 +38,9 @@ vec3 getColor(float t) {
 
 void main() {
 
-    const vec2 C = inC;
-    vec2 Z = vec2(gl_FragCoord.x * (area_w.y - area_w.x) / rect_width  + area_w.x,
+    const vec2 C = vec2(gl_FragCoord.x * (area_w.y - area_w.x) / rect_width  + area_w.x,
                         gl_FragCoord.y * (area_h.y - area_h.x) / rect_height + area_h.x);
+    vec2 Z = vec2(0.0);
     uint iteration = 0;
 
     while (iteration < max_iterations) {

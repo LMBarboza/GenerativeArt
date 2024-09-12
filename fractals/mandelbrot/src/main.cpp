@@ -9,7 +9,6 @@
 #include <cmath>
 #include <glad/glad.h>
 #include <iostream>
-#include <optional>
 #include <unordered_map>
 
 constexpr int WINDOW_WIDTH = 800;
@@ -66,24 +65,7 @@ void processKeyStates() {
   }
 }
 
-std::optional<float> getArg(int argc, char *argv[], int index) {
-  if (index < argc) {
-    return std::stof(argv[index]);
-  }
-  return std::nullopt;
-}
-
-int main(int argc, char *argv[]) {
-
-  float cReal = -0.4f;
-  float cImag = 0.59f;
-
-  if (auto arg1 = getArg(argc, argv, 1)) {
-    cReal = *arg1;
-  }
-  if (auto arg2 = getArg(argc, argv, 2)) {
-    cImag = *arg2;
-  }
+int main() {
   glfwInit();
 
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -128,7 +110,6 @@ int main(int argc, char *argv[]) {
     glUniform2f(3, -1.0F * julia_data.scale + julia_data.y,
                 1.0F * julia_data.scale + julia_data.y);
     glUniform1ui(4, julia_data.max_iter);
-    glUniform2f(5, cReal, cImag);
     VAO1.Bind();
     glDrawArrays(GL_TRIANGLES, 0, 6);
     glfwSwapBuffers(window);
