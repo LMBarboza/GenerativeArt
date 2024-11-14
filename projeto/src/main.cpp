@@ -2,13 +2,13 @@
 #include <glad/glad.h>
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "../include/stb_image.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include <learnopengl/camera.h>
-#include <learnopengl/shader_m.h>
+#include "../include/camera.hpp"
+#include "../include/shader_m.hpp"
 
 #include <iostream>
 #include <vector>
