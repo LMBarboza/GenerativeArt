@@ -1,3 +1,4 @@
+#define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
@@ -41,8 +42,8 @@ int main() {
   // glfw: initialize and configure
   // ------------------------------
   glfwInit();
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 #ifdef __APPLE__
@@ -80,7 +81,7 @@ int main() {
 
   // build and compile our shader program
   // ------------------------------------
-  Shader heightMapShader("8.3.cpuheight.vs", "8.3.cpuheight.fs");
+  Shader heightMapShader("height.vs", "height.fs");
 
   // load and create a texture
   // -------------------------
@@ -97,7 +98,6 @@ int main() {
   } else {
     std::cout << "Failed to load texture" << std::endl;
   }
-
   // set up vertex data (and buffer(s)) and configure vertex attributes
   // ------------------------------------------------------------------
   std::vector<float> vertices;
@@ -203,11 +203,12 @@ int main() {
 
     // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved
     // etc.)
-    // -------------------------------------------------------------------------------
+    //
+    //   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+    //   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
     glfwSwapBuffers(window);
     glfwPollEvents();
   }
-
   // optional: de-allocate all resources once they've outlived their purpose:
   // ------------------------------------------------------------------------
   glDeleteVertexArrays(1, &terrainVAO);
